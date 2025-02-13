@@ -211,13 +211,13 @@ if (isset($update['message'])) {
         } else {
     $keyboard = [
         'inline_keyboard' => [
-            [['text' => 'למעבר לקבוצה של הבוט',
+            [['text' => 'קבוצת בקשות 💬',
                 'url' => 'https://t.me/bot_Search_movies']],
-            [['text' =>  'מדריך לחיפוש בבוט',
-            'callback_data' => 'מדריך'],
-        ['text' => 'הודעה לזכויות יוצרים',
-            'callback_data' => 'זכויות יוצרים']],
-            [['text' => 'לערוץ העדכונים של הבוט',
+            [['text' =>  'עזרה 🕸️',
+            'callback_data' => 'עזרה'],
+        ['text' => 'אודות ✨',
+            'callback_data' => 'אודות']],
+            [['text' => 'ערוץ עדכונים 🔊',
             'url' => 'https://t.me/amoviesnww1o']],
         ]
     ];
@@ -231,12 +231,11 @@ if (isset($update['message'])) {
 
 👨🏼‍💻מתכנת ראשי: @BOSS1480</b>",
         'parse_mode' => 'HTML',
-        'disable_web_page_preview' => true, 
         'reply_markup' => json_encode($keyboard),
         'reply_to_message_id' => $message['message_id']
     ]);
-}
-
+        }
+        
 
     } elseif (!empty($text)) {
         if ($chatType === 'private') {
