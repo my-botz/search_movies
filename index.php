@@ -169,23 +169,17 @@ if (isset($update['message'])) {
         file_put_contents("users.txt", $chatId . "\n", FILE_APPEND);
     }
 
-    if ($chatType === 'channel' && $chatId == $channelId) {
+    if ($message['chat']['id'] == $channelId) {
     if (isset($message['document'])) {
         $fileId = $message['document']['file_id'];
         $messageId = $message['message_id'];
         $fileName = $message['document']['file_name'];
-
-        if (!empty($fileName)) {
-            saveFile($fileId, $messageId, $fileName);
-        }
+        saveFile($fileId, $messageId, $fileName);
     } elseif (isset($message['video'])) {
         $fileId = $message['video']['file_id'];
         $messageId = $message['message_id'];
-        $fileName = isset($message['video']['file_name']) ? $message['video']['file_name'] : null;
-
-        if (!empty($fileName)) {
-            saveFile($fileId, $messageId, $fileName);
-        }
+        $fileName = isset($message['video']['file_name']) ? $message['video']['file_name'] : "וידאו ללא שם";
+        saveFile($fileId, $messageId, $fileName);
     }
     }
 
