@@ -1,8 +1,8 @@
 <?php
 
-$botToken = "6771999599:AAEO2ny0ns92tBI48JcBlbmUa6USwvVNSik"; 
-$channelId = "-1002354417398";
-$adminId = "7415337843"; // המזהה של המנהל
+$botToken = getenv('BOT_TOKEN'); 
+$channelId = getenv('CHANNEL_ID'); 
+$adminId = getenv('ADMIN_ID');
 
 $apiUrl = "https://api.telegram.org/bot$botToken/";
 $files = [];
