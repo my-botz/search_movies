@@ -292,7 +292,7 @@ if (isset($update['message'])) {
             foreach ($pagedResults as $result) {
                 $buttonText = (strlen($result['name']) > 60) ? mb_substr($result['name'], 0, 60) . '' : $result['name'];
                 $inlineKeyboard[] = [
-                    ['text' => $buttonText, 'url' => "https://t.me/filter_sratim3_bot?start=" . $result['id']]
+                    ['text' => $buttonText, 'url' => "https://t.me/$bot_name?start=" . $result['id']]
                 ];
             }
 
@@ -400,7 +400,7 @@ if (isset($update['message'])) {
         foreach ($pagedResults as $result) {
             $buttonText = (strlen($result['name']) > 60) ? mb_substr($result['name'], 0, 60) . '' : $result['name'];
             $inlineKeyboard[] = [
-                ['text' => $buttonText, 'url' => "https://t.me/filter_sratim3_bot?start=" . $result['id']]
+                ['text' => $buttonText, 'url' => "https://t.me/$bot_name?start=" . $result['id']]
             ];
         }
 
@@ -519,7 +519,7 @@ elseif ($callbackData == "מדריך") {
             sendRequest('editMessageText', [
                 'chat_id' => $chatId2,
                 'message_id' => $messageId,
-                'text' => "⚙️<b><u>מדריך לחיפוש </u></b><a href='https://t.me/filter_sratim4_bot'><b>ברובוט החיפוש</b></a>⚙️
+                'text' => "⚙️<b><u>מדריך לחיפוש </u></b><a href='https://t.me/$bot_name'><b>ברובוט החיפוש</b></a>⚙️
 
 כשאתם מבקשים סרט או סדרה יש דרך לבקש...
 <b>צריך להוסיף סימן קריאה ( ! ) לפני מה שרוצים...</b>
@@ -560,7 +560,7 @@ elseif ($callbackData == "אודות") {
                 'chat_id' => $chatId2,
                 'message_id' => $messageId,
                 'text' => "╭───────────⍟
-<b>├◈ ᴍy ɴᴀᴍᴇ : </b><a href='https://t.me/filter_sratim4_bot'><b>𝚜𝚎𝚊𝚛𝚌𝚑 𝚖𝚘𝚟𝚒𝚎𝚜</b></a><b>
+<b>├◈ ᴍy ɴᴀᴍᴇ : </b><a href='https://t.me/$bot_name'><b>𝚜𝚎𝚊𝚛𝚌𝚑 𝚖𝚘𝚟𝚒𝚎𝚜</b></a><b>
 ├◈ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : </b><a href='tg://user?id=6335855540'><b>@BOSS1480</b></a><b> 
 ├◈ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ: </b><a href='https://t.me/bot_sratim_sdarot'><b>בוטים 🇮🇱</b></a><b>   
 ├◈ Lɪʙʀᴀʀy : none
