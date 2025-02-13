@@ -202,8 +202,8 @@ if (isset($update['message'])) {
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
             'callback_data' => 'אודות']],
-            [['text' => 'ערוץ עדכונים 🔊',
-            'url' => 'https://t.me/amoviesnww1o']],
+        [['text' => 'הוסף אותי לקבוצה שלך ➕',
+            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
         ]
     ];
 
@@ -502,8 +502,8 @@ elseif ($callbackData == "בית") {
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
             'callback_data' => 'אודות']],
-        [['text' => 'ערוץ עדכונים 🔊',
-            'url' => 'https://t.me/amoviesnww1o']],
+        [['text' => 'הוסף אותי לקבוצה שלך ➕',
+            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
         ]
         ])
     ]);
