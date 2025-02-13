@@ -196,14 +196,14 @@ if (isset($update['message'])) {
         } else {
     $keyboard = [
         'inline_keyboard' => [
-            [['text' => 'קבוצת בקשות 💬',
-                'url' => $group]],
+            [['text' => 'הוסף אותי לקבוצה שלך ➕',
+            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
             [['text' =>  'עזרה 🕸️',
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
             'callback_data' => 'אודות']],
-        [['text' => 'הוסף אותי לקבוצה שלך ➕',
-            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
+        [['text' => 'קבוצת בקשות 💬',
+                'url' => $group]],
         ]
     ];
 
@@ -496,14 +496,14 @@ elseif ($callbackData == "בית") {
         'reply_markup' => json_encode([
                 
                 'inline_keyboard' => [
-    [['text' => 'קבוצת בקשות 💬',
-            'url' => $group]],
+    [['text' => 'הוסף אותי לקבוצה שלך ➕',
+            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
     [['text' =>  'עזרה 🕸️',
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
             'callback_data' => 'אודות']],
-        [['text' => 'הוסף אותי לקבוצה שלך ➕',
-            'url' => 'http://t.me/' . $bot_name . '?startgroup=true']],
+        [['text' => 'קבוצת בקשות 💬',
+                'url' => $group]],
         ]
         ])
     ]);
