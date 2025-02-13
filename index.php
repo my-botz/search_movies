@@ -171,20 +171,17 @@ if (isset($update['message'])) {
     }
 
     if ($message['chat']['id'] == $channelId) {
-    if (isset($message['document'])) {
-        $fileId = $message['document']['file_id'];
-        $messageId = $message['message_id'];
-        $fileName = $message['document']['file_name'];
-        saveFile($fileId, $messageId, $fileName);
-    } elseif (isset($message['video'])) {
-        $fileId = $message['video']['file_id'];
-        $messageId = $message['message_id'];
-        $fileName = isset($message['video']['file_name']) ? $message['video']['file_name'] : null;
-
-        if ($fileName) {
+        if (isset($message['document'])) {
+            $fileId = $message['document']['file_id'];
+            $messageId = $message['message_id'];
+            $fileName = $message['document']['file_name'];
+            saveFile($fileId, $messageId, $fileName);
+        } elseif (isset($message['video'])) {
+            $fileId = $message['video']['file_id'];
+            $messageId = $message['message_id'];
+            $fileName = isset($message['video']['file_name']) ? $message['video']['file_name'] : "וידאו ללא שם";
             saveFile($fileId, $messageId, $fileName);
         }
-    }
     }
 
     if (strpos($text, '/start') === 0) {
