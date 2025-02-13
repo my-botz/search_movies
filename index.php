@@ -541,8 +541,6 @@ elseif ($callbackData == "מדריך") {
                 'disable_web_page_preview' => true, 
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
-                    [['text' => '',
-                    'url' => '']],
                     [['text' => 'חזרה »',
                     'callback_data' => 'עזרה']]
                     ]
