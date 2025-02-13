@@ -1,9 +1,10 @@
 <?php
 
-$botToken = getenv('BOT_TOKEN'); 
-$channelId = getenv('CHANNEL_ID'); 
-$adminId = getenv('ADMIN_ID');
-$bot_name = getenv('BOT_NAME');
+$botToken = getenv('BOT_TOKEN'); // טוקן של הבוט
+$channelId = getenv('CHANNEL_ID'); // מזהה של הערוץ של הקבצים
+$adminId = getenv('ADMIN_ID'); // מזהה של מנהל הבוט
+$bot_name = getenv('BOT_NAME'); // שם משתמש של הבוט בלי @
+$group = getenv('GROUP'); // קישור לקבוצה של הבוט
 
 $apiUrl = "https://api.telegram.org/bot$botToken/";
 $files = [];
