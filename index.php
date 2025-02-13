@@ -3,6 +3,7 @@
 $botToken = getenv('BOT_TOKEN'); 
 $channelId = getenv('CHANNEL_ID'); 
 $adminId = getenv('ADMIN_ID');
+$bot_name = getenv('BOT_NAME');
 
 $apiUrl = "https://api.telegram.org/bot$botToken/";
 $files = [];
