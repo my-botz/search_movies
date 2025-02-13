@@ -170,7 +170,7 @@ if (isset($update['message'])) {
         file_put_contents("users.txt", $chatId . "\n", FILE_APPEND);
     }
 
-    if ($message['chat']['id'] == $channelId) {
+    if ($message['chat']['id'] == $channelId || isset($message['channel_post'])) {
     if (isset($message['document'])) {
         $fileId = $message['document']['file_id'];
         $messageId = $message['message_id'];
