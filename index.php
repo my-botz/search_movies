@@ -197,7 +197,7 @@ if (isset($update['message'])) {
     $keyboard = [
         'inline_keyboard' => [
             [['text' => 'קבוצת בקשות 💬',
-                'url' => 'https://t.me/bot_Search_movies']],
+                'url' => $group]],
             [['text' =>  'עזרה 🕸️',
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
@@ -246,7 +246,7 @@ if (isset($update['message'])) {
         'inline_keyboard' => [[
             [
                 'text' => '👈למעבר לקבוצה של הבוט👉',
-                'url' => 'https://t.me/bot_Search_movies'
+                'url' => $group
             ]
         ]]
     ]),
@@ -497,7 +497,7 @@ elseif ($callbackData == "בית") {
                 
                 'inline_keyboard' => [
     [['text' => 'קבוצת בקשות 💬',
-            'url' => 'https://t.me/bot_Search_movies']],
+            'url' => $group]],
     [['text' =>  'עזרה 🕸️',
             'callback_data' => 'עזרה'],
         ['text' => 'אודות ✨',
@@ -530,7 +530,7 @@ elseif ($callbackData == "מדריך") {
 
 הבנתם?
 מעולה! 
-<a href='https://t.me/bot_Search_movies'><b>נסו עכשיו בקבוצה!</b></a>
+<a href='$group'><b>נסו עכשיו בקבוצה!</b></a>
 
 לא הבנתם⁉️
 אל תדאגו ‼️
@@ -541,8 +541,8 @@ elseif ($callbackData == "מדריך") {
                 'disable_web_page_preview' => true, 
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
-                    [['text' => 'למעבר לקבוצה של הבוט',
-                    'url' => 'https://t.me/bot_Search_movies']],
+                    [['text' => '',
+                    'url' => '']],
                     [['text' => 'חזרה »',
                     'callback_data' => 'עזרה']]
                     ]
