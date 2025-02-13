@@ -25,7 +25,6 @@ function sendRequest($method, $parameters) {
 }
 
 function saveFile($fileId, $messageId, $fileName) {
-    // מציאת הקובץ האחרון
     $fileIndex = 1;
     while (file_exists("files$fileIndex.json")) {
         $fileIndex++;
@@ -33,52 +32,43 @@ function saveFile($fileId, $messageId, $fileName) {
     $fileIndex = max(1, $fileIndex - 1);
     $currentFilePath = "files$fileIndex.json";
 
-    // טעינת הקבצים הקיימים
     $existingFiles = file_exists($currentFilePath) 
         ? json_decode(file_get_contents($currentFilePath), true) 
         : [];
 
-    // בדיקה אם יש צורך ביצירת קובץ חדש
     if (count($existingFiles) >= 70000) {
         $fileIndex++;
         $currentFilePath = "files$fileIndex.json";
         $existingFiles = [];
     }
 
-    // בדיקה שהקובץ לא כבר קיים
     foreach ($existingFiles as $data) {
         if ($data['file_id'] == $fileId) {
             return;
         }
     }
 
-    // חישוב המזהה הייחודי
     $uniqueId = $startFromId + count($existingFiles);
     $fileName = str_replace(['_', '-', '.'], ' ', $fileName);
 
-    // הוספת הקובץ לרשימה
     $existingFiles[$uniqueId] = [
         'message_id' => $messageId, 
         'file_id' => $fileId, 
         'file_name' => $fileName
     ];
 
-    // שמירת הקובץ
     file_put_contents($currentFilePath, json_encode($existingFiles));
 }
 
 function loadFiles() {
     global $files;
-    
-    // איפוס המערך הכללי
-    $files = [];
 
-    // טעינת כל קבצי files*.json
+    $files = [];
+    
     $fileIndex = 1;
     while (file_exists("files$fileIndex.json")) {
         $currentFiles = json_decode(file_get_contents("files$fileIndex.json"), true);
         
-        // הוספת הקבצים לאוסף הכללי
         if (!empty($currentFiles)) {
             $files = array_merge($files, $currentFiles);
         }
@@ -88,27 +78,23 @@ function loadFiles() {
 }
 
 function cleanFileName($fileName) {
-    // רשימת הביטויים להסרה
+    
     $removePatterns = ['mp4', 'mkv', 'avi',
     ];
     
-    // הסרת כל אחד מהביטויים
     foreach ($removePatterns as $pattern) {
         $fileName = preg_replace('/\b' . preg_quote($pattern, '/') . '\b/ui', '', $fileName);
     }
-    
-    // הסרת רווחים כפולים שנוצרו
+
     $fileName = preg_replace('/\s+/', ' ', $fileName);
-    
-    // הסרת רווחים מתחילת וסוף השם
+
     return trim($fileName);
 }
 
 function extractSeasonEpisode($fileName) {
     $season = 0;
     $episode = 0;
-    
-    // חיפוש עונה ופרק בפורמטים שונים
+
     if (preg_match('/(?:עונה|season|ע|s)\s*(\d+).*?(?:פרק|episode|פ|e)\s*(\d+)/i', $fileName, $matches)) {
         $season = intval($matches[1]);
         $episode = intval($matches[2]);
@@ -139,7 +125,6 @@ function searchFiles($query) {
         }
     }
 
-    // מיון התוצאות לפי עונה ופרק
     usort($results, function($a, $b) {
         if ($a['season'] != $b['season']) {
             return $a['season'] - $b['season'];
@@ -166,7 +151,6 @@ function paginateResults($results, $page = 1) {
     return [array_slice($results, $startIndex, $resultsPerPage), $totalPages];
 }
 
-// טעינת הקבצים בהתחלה
 loadFiles();
 
 $content = file_get_contents("php://input");
@@ -178,7 +162,6 @@ if (isset($update['message'])) {
     $text = $message['text'] ?? '';
     $chatType = $message['chat']['type'] ?? 'private';
 
-    // ספירת משתמשים
     $userList = file_get_contents("users.txt");
     $userIds = explode("\n", $userList);
     if (!in_array($chatId, $userIds) && $chatType === 'private') {
@@ -239,7 +222,7 @@ if (isset($update['message'])) {
 
     } elseif (!empty($text)) {
         if ($chatType === 'private') {
-            // שינוי כאן - הפקודה /פאנל תעבוד גם בפרטי
+            
             if (strpos($text, '/פאנל') === 0 && $message['from']['id'] == $adminId) {
                 sendRequest('sendMessage', [
                     'chat_id' => $chatId,
@@ -251,7 +234,7 @@ if (isset($update['message'])) {
                         ]
                     ])
                 ]);
-                return; // יציאה מהפונקציה לאחר שליחת הפאנל
+                return;
             }
    sendRequest('sendMessage', [
     'chat_id' => $chatId,
@@ -298,7 +281,6 @@ if (isset($update['message'])) {
         if (!empty($results)) {
             list($pagedResults, $totalPages) = paginateResults($results, $page);
 
-            // שמור את הנתונים של הדף הנוכחי
             $inlineKeyboard = [];
             foreach ($pagedResults as $result) {
                 $buttonText = (strlen($result['name']) > 60) ? mb_substr($result['name'], 0, 60) . '' : $result['name'];
@@ -307,7 +289,6 @@ if (isset($update['message'])) {
                 ];
             }
 
-            // כפתורי ניווט
             $navigationButtons = [];
             if ($page > 1) {
                 $navigationButtons[] = ['text' => '<--', 'callback_data' => $searchQuery . "_" . ($page - 1)];
@@ -320,7 +301,6 @@ if (isset($update['message'])) {
                 $inlineKeyboard[] = $navigationButtons;
             }
 
-            // שליחת התוצאות
             sendRequest('sendMessage', [
                 'chat_id' => $chatId,
                 'text' => "התוצאות שנמצאו עבור <b>'$searchQuery'</b>\n (דף $page מתוך $totalPages)",
@@ -360,7 +340,7 @@ if (isset($update['message'])) {
     $callbackData = $callbackQuery['data'];
     $id2 = $callbackQuery['from']['id'];
 
-    // פאנל ניהול
+    
     if ($id2 == $adminId) {
         if ($callbackData == "user") {
             $user = file_get_contents("users.txt");
@@ -397,19 +377,18 @@ if (isset($update['message'])) {
                 'text' => "אוקי עכשיו שלח לי את הטקסט שלך",
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
-                        [['text' => '❌ביטול❌', 'callback_data' => "home"]]
+                        [['text' => '', 'callback_data' => "home"]]
                     ]
                 ])
             ]);
         }
     } elseif (strpos($callbackData, "_") !== false) {
-        // אם הכפתור הוא ניווט
+        
         list($searchQuery, $page) = explode("_", $callbackData);
         $results = searchFiles($searchQuery);
-        $page = (int)$page; // המרת הדף למספר שלם
+        $page = (int)$page; 
         list($pagedResults, $totalPages) = paginateResults($results, $page);
 
-        // שמור את הנתונים של הדף הנוכחי
         $inlineKeyboard = [];
         foreach ($pagedResults as $result) {
             $buttonText = (strlen($result['name']) > 60) ? mb_substr($result['name'], 0, 60) . '' : $result['name'];
@@ -418,7 +397,6 @@ if (isset($update['message'])) {
             ];
         }
 
-        // כפתורי ניווט
         $navigationButtons = [];
         if ($page > 1) {
             $navigationButtons[] = ['text' => '<--', 'callback_data' => $searchQuery . "_" . ($page - 1)];
@@ -431,7 +409,6 @@ if (isset($update['message'])) {
             $inlineKeyboard[] = $navigationButtons;
         }
 
-        // עדכון ההודעה עם התוצאות החדשות
         sendRequest('editMessageText', [
             'chat_id' => $chatId2,
             'message_id' => $messageId,
@@ -442,7 +419,6 @@ if (isset($update['message'])) {
     }
 }
 
-// בדיקה אם המנהל שלח הודעה לאחר שלחץ על 'הודעה למשתמשים'
 if (isset($update['message']['text']) && $update['message']['text'] != '/פאנל' && $update['message']['from']['id'] == $adminId) {
     if (file_exists("bcpv.txt") && trim(file_get_contents("bcpv.txt")) == "bc") {
         file_put_contents("bcpv.txt", "none");
@@ -466,7 +442,6 @@ if (isset($update['message']['text']) && $update['message']['text'] != '/פאנ�
     }
 }
 
-// הוספת תנאי לפתיחת הפאנל בניהול
 if (isset($update['message']['text']) && $update['message']['text'] == '/פאנל' && $message['from']['id'] == $adminId) {
     sendRequest('sendMessage', [
         'chat_id' => $chatId,
