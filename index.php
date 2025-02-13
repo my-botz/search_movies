@@ -170,21 +170,19 @@ if (isset($update['message'])) {
         file_put_contents("users.txt", $chatId . "\n", FILE_APPEND);
     }
 
-    if (isset($message['channel_post'])) {
-    if ($message['channel_post']['chat']['id'] == $channelId) {
-        if (isset($message['channel_post']['document'])) {
-            $fileId = $message['channel_post']['document']['file_id'];
-            $messageId = $message['channel_post']['message_id'];
-            $fileName = $message['channel_post']['document']['file_name'];
+    if ($message['chat']['id'] == $channelId) {
+        if (isset($message['document'])) {
+            $fileId = $message['document']['file_id'];
+            $messageId = $message['message_id'];
+            $fileName = $message['document']['file_name'];
             saveFile($fileId, $messageId, $fileName);
-        } elseif (isset($message['channel_post']['video'])) {
-            $fileId = $message['channel_post']['video']['file_id'];
-            $messageId = $message['channel_post']['message_id'];
-            $fileName = isset($message['channel_post']['video']['file_name']) ? $message['channel_post']['video']['file_name'] : "וידאו ללא שם";
+        } elseif (isset($message['video'])) {
+            $fileId = $message['video']['file_id'];
+            $messageId = $message['message_id'];
+            $fileName = isset($message['video']['file_name']) ? $message['video']['file_name'] : "וידאו ללא שם";
             saveFile($fileId, $messageId, $fileName);
         }
     }
-}
 
     if (strpos($text, '/start') === 0) {
         $uniqueId = substr($text, 7);
