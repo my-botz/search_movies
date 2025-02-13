@@ -487,6 +487,7 @@ if (isset($update['message']['text']) && $update['message']['text'] == '/פאנ�
 ##
 #
 
+
 elseif ($callbackData == "זכויות יוצרים") {
             sendRequest('editMessageText', [
                 'chat_id' => $chatId2,
@@ -496,13 +497,13 @@ elseif ($callbackData == "זכויות יוצרים") {
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
-                    [['text' => 'חזרה',
-                    'callback_data' => 'בית']]
+                    [['text' => 'חזרה »',
+                    'callback_data' => 'עזרה']]
                     ]
                 ])
             ]);
         }
-
+        
 
 elseif ($callbackData == "בית") {
             sendRequest('editMessageText', [
@@ -518,13 +519,13 @@ elseif ($callbackData == "בית") {
         'reply_markup' => json_encode([
                 
                 'inline_keyboard' => [
-    [['text' => 'למעבר לקבוצה של הבוט',
+    [['text' => 'קבוצת בקשות 💬',
             'url' => 'https://t.me/bot_Search_movies']],
-    [['text' =>  'מדריך לחיפוש בבוט',
-            'callback_data' => 'מדריך'],
-        ['text' => 'הודעה לזכויות יוצרים',
-            'callback_data' => 'זכויות יוצרים']],
-        [['text' => 'לערוץ העדכונים של הבוט',
+    [['text' =>  'עזרה 🕸️',
+            'callback_data' => 'עזרה'],
+        ['text' => 'אודות ✨',
+            'callback_data' => 'אודות']],
+        [['text' => 'ערוץ עדכונים 🔊',
             'url' => 'https://t.me/amoviesnww1o']],
         ]
         ])
@@ -536,7 +537,7 @@ elseif ($callbackData == "מדריך") {
             sendRequest('editMessageText', [
                 'chat_id' => $chatId2,
                 'message_id' => $messageId,
-                'text' => "⚙️<b><u>מדריך לחיפוש </u></b><a href='https://t.me/filter_sratim3_bot'><b>ברובוט החיפוש</b></a>⚙️
+                'text' => "⚙️<b><u>מדריך לחיפוש </u></b><a href='https://t.me/filter_sratim4_bot'><b>ברובוט החיפוש</b></a>⚙️
 
 כשאתם מבקשים סרט או סדרה יש דרך לבקש...
 <b>צריך להוסיף סימן קריאה ( ! ) לפני מה שרוצים...</b>
@@ -563,11 +564,56 @@ elseif ($callbackData == "מדריך") {
                 'disable_web_page_preview' => true, 
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
-                    [['text' => 'חזרה',
+                    [['text' => 'למעבר לקבוצה של הבוט',
+                    'url' => 'https://t.me/bot_Search_movies']],
+                    [['text' => 'חזרה »',
+                    'callback_data' => 'עזרה']]
+                    ]
+                ])
+            ]);
+        }
+        
+elseif ($callbackData == "אודות") {
+            sendRequest('editMessageText', [
+                'chat_id' => $chatId2,
+                'message_id' => $messageId,
+                'text' => "╭───────────⍟
+<b>├◈ ᴍy ɴᴀᴍᴇ : </b><a href='https://t.me/filter_sratim4_bot'><b>𝚜𝚎𝚊𝚛𝚌𝚑 𝚖𝚘𝚟𝚒𝚎𝚜</b></a><b>
+├◈ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : </b><a href='tg://user?id=6335855540'><b>@BOSS1480</b></a><b> 
+├◈ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ: </b><a href='https://t.me/bot_sratim_sdarot'><b>בוטים 🇮🇱</b></a><b>   
+├◈ Lɪʙʀᴀʀy : none
+├◈ Lᴀɴɢᴜᴀɢᴇ: php
+├◈ Dᴀᴛᴀ Bᴀꜱᴇ: hostinger
+├◈ Bot Vᴇʀꜱɪᴏɴ: V-2.0
+╰───────────────⍟</b>",
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'inline_keyboard' => [
+                    [['text' => '𝚜𝚘𝚞𝚛𝚌𝚎 𝚌𝚘𝚍𝚎',
+                    'url' => 'https://t.me/+PDuU4Tt5UTRkZDE0']],
+                    [['text' => 'חזרה »',
                     'callback_data' => 'בית']]
                     ]
                 ])
             ]);
         }
         
+elseif ($callbackData == "עזרה") {
+            sendRequest('editMessageText', [
+                'chat_id' => $chatId2,
+                'message_id' => $messageId,
+                'text' => "<b>תבחר מהתפריט עזרה שיש למטה👇</b>",
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'inline_keyboard' => [
+        [['text' => 'מדריך שימוש בבוט 🛠️',
+            'callback_data' => 'מדריך'],
+            ['text' =>  'זכויות יוצרים 😡',
+            'callback_data' => 'זכויות יוצרים']],
+                    [['text' => 'יציאה ✘',
+                    'callback_data' => 'בית']]
+                    ]
+                ])
+            ]);
+        }
 ?>
