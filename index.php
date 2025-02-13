@@ -584,7 +584,7 @@ elseif ($callbackData == "אודות") {
 ├◈ Lɪʙʀᴀʀy : none
 ├◈ Lᴀɴɢᴜᴀɢᴇ: php
 ├◈ Dᴀᴛᴀ Bᴀꜱᴇ: hostinger
-├◈ Bot Vᴇʀꜱɪᴏɴ: V-2.0
+├◈ Bot Vᴇʀꜱɪᴏɴ: V-1.5
 ╰───────────────⍟</b>",
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode([
