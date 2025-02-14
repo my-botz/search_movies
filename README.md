@@ -8,11 +8,6 @@
 - **שמירה וניהול קבצים:** הבוט שומר את כל הקבצים שנשלחים בקבוצה שמגדירים במשתנה `CHANNEL_ID
 - **תמיכה בקבצים שונים:** הבוט תומך במסמכים, סרטונים וסוגי קבצים נוספים.
 
-## דרישות
-
-- PHP 7.0 ומעלה
-- טוקן של בוט מ [@botfather](https://t.me/botfather)
-
 ## התקנה
 
 1. **שכפול של הרפוזיטורי:**
@@ -27,7 +22,7 @@
 3. **הגדר משתנים דרושים:**
    צור קובץ `.env` או עדכן את המשתנים הסביבתיים שלך:
    ```plaintext
-   BOT_TOKEN=your_bot_token
+   BOT_TOKEN=your_token_bot
    CHANNEL_ID=your_channel_id
    ADMIN_ID=your_admin_id
    BOT_NAME=your_bot_username
